@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contrat index{% endblock %}
+
+{% block body %}
+    <h1>Contrat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="table-header">Id</th>
+                <th class="table-header">Nom</th>
+                <th class="table-header">Prenom</th>
+                <!-- Ajoutez les classes pour les autres en-têtes de colonne si nécessaire -->
+                <!-- Vous pouvez également utiliser un sélecteur de classe ou d'ID pour cibler uniquement ce tableau -->
+                <th class="table-header">Mail</th>
+                <th class="table-header">DateDebut</th>
+                <th class="table-header">DateFin</th>
+                <th class="table-header">Loyer</th>
+                <th class="table-header">Caution</th>
+                <th class="table-header">SignatureId</th>
+                <th class="table-header">DocumentId</th>
+                <th class="table-header">SignerId</th>
+                <th class="table-header">PdfSansSignature</th>
+                <th class="table-header">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contrat in contrats %}
+                <tr>
+                    <td>{{ contrat.id }}</td>
+                    <td>{{ contrat.nom }}</td>
+                    <td>{{ contrat.prenom }}</td>
+                    <td>{{ contrat.mail }}</td>
+                    <td>{{ contrat.dateDebut ? contrat.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ contrat.dateFin ? contrat.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ contrat.loyer }}</td>
+                    <td>{{ contrat.caution }}</td>
+                    <td>{{ contrat.signatureId }}</td>
+                    <td>{{ contrat.documentId }}</td>
+                    <td>{{ contrat.signerId }}</td>
+                    <td>{{ contrat.pdfSansSignature }}</td>
+                    <td>
+                        <a href="{{ path('app_contrat_show', {'id': contrat.id}) }}" role="button">show</a> 
+                        <a href="{{ path('app_contrat_edit', {'id': contrat.id}) }}" role="button">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="13">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_contrat_new') }}" role="button">Create new</a>
+{% endblock %}
